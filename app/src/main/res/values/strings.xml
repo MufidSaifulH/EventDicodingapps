@@ -15,4 +15,7 @@
     <string name="recomendation">Recomendation Event for You</string>
     <string name="finish">Finished Event\n</string>
     <string name="finish_event">Event has been Finished</string>
+    <string name="daily_reminder">Daily Reminder</string>
+    <string name="dark_mode">Dark Mode</string>
+    <string name="setting">Setting</string>
 </resources>

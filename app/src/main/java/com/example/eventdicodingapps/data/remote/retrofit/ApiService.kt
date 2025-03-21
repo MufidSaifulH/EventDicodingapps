@@ -11,4 +11,10 @@ interface ApiService {
         @Query("q") query: String? = null,
         @Query("limit") limit: Int = 40,
     ): EventResponse
+
+    @GET("events")
+    suspend fun getUpcomingEvent(
+        @Query("active") active: Int = -1,  // -1 untuk event aktif terdekat
+        @Query("limit") limit: Int = 1      // Ambil hanya 1 event
+    ): EventResponse
 }

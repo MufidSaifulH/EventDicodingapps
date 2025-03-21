@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Setting"
+        android:text="@string/setting"
         android:textSize="32sp"
         android:layout_marginTop="80dp"/>
 
@@ -18,7 +18,16 @@
         android:id="@+id/switch_theme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Dark Mode"
+        android:text="@string/dark_mode"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:layout_marginTop="24dp"/>
+
+    <com.google.android.material.switchmaterial.SwitchMaterial
+        android:id="@+id/switch_notification"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/daily_reminder"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginTop="24dp"/>

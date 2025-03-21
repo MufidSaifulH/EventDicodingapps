@@ -5,11 +5,8 @@ import android.os.Bundle
 import android.text.Html
 import android.text.method.LinkMovementMethod
 import android.view.MenuItem
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.eventdicodingapps.data.local.entity.EventEntity
@@ -17,6 +14,7 @@ import com.example.eventdicodingapps.databinding.ActivityDetailBinding
 import java.text.SimpleDateFormat
 import java.util.Locale
 
+@Suppress("DEPRECATION")
 class DetailActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailBinding
