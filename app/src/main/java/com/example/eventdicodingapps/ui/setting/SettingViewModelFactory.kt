@@ -1,11 +1,8 @@
 package com.example.eventdicodingapps.ui.setting
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.eventdicodingapps.EventRepository
-import com.example.eventdicodingapps.MainViewModel
-import com.example.eventdicodingapps.di.Injection
+
 
 class SettingViewModelFactory (private val preference: SettingPreference) :
     ViewModelProvider.NewInstanceFactory() {
@@ -16,13 +13,4 @@ class SettingViewModelFactory (private val preference: SettingPreference) :
         }
         throw IllegalArgumentException("Unknown ViewModel class: " + modelClass.name)
     }
-
-//    companion object {
-//        @Volatile
-//        private var instance: SettingViewModelFactory? = null
-//        fun getInstance(context: Context): SettingViewModelFactory =
-//            instance ?: synchronized(this) {
-//                instance ?: SettingViewModelFactory(Injection.provideRepository(context))
-//            }.also { instance = it }
-//    }
 }

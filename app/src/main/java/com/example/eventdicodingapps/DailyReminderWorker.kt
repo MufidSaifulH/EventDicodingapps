@@ -14,15 +14,15 @@ class DailyReminderWorker (context: Context, workerParams: WorkerParameters) : W
             try {
                 val apiService = ApiConfig.getApiService()
                 val response = apiService.getUpcomingEvent()
+                val event = response.listEvents?.firstOrNull{it.active == 1}
 
-                if (response.listEvents?.isNotEmpty() == true) {
-                    val event = response.listEvents?.first()
-                    NotificationHelper.showNotification(
-                        applicationContext,
-                        "Upcoming Event: ${event?.name}",
-                        "Event Date: ${event?.beginTime}"
-                    )
-                }
+               if (event != null) {
+                   NotificationHelper.showNotification(
+                       applicationContext,
+                       "Upcoming Event: ${event.name}",
+                       "Event Date: ${event.beginTime}"
+                   )
+               }
                 Result.success()
             } catch (e: Exception) {
                 Log.e("DailyReminderWorker", "Error fetching event: ${e.message}")

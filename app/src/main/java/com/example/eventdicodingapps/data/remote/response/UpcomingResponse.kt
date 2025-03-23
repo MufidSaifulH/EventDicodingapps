@@ -63,4 +63,7 @@ data class ListEventsItem(
 	@field:SerializedName("link")
 	val link: String? = null,
 
+	@field:SerializedName("active")
+	val active: Int? = null
+
 	) : Parcelable

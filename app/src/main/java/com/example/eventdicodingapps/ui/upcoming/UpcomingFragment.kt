@@ -12,13 +12,7 @@ import com.example.eventdicodingapps.MainViewModel
 import com.example.eventdicodingapps.MainViewModelFactory
 import com.example.eventdicodingapps.Result
 import com.example.eventdicodingapps.adapter.AdapterEvent
-//import com.example.eventdicodingapps.EventRepository
-//import com.example.eventdicodingapps.MainViewModelFactory
-//import com.example.eventdicodingapps.adapter.EventAdapter
-//import com.example.eventdicodingapps.data.local.entity.DicodingEntity
-//import com.example.eventdicodingapps.data.local.room.DicodingDatabase
 import com.example.eventdicodingapps.databinding.FragmentHomeBinding
-import com.example.eventdicodingapps.ui.setting.SettingViewModelFactory
 
 class UpcomingFragment : Fragment() {
 
@@ -59,13 +53,13 @@ class UpcomingFragment : Fragment() {
                     verticalAdapter.setLoadingState(true)
                 }
 
-                is com.example.eventdicodingapps.Result.Success -> {
+                is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     verticalAdapter.setLoadingState(false)
                     verticalAdapter.submitList(result.data)
                 }
 
-                is com.example.eventdicodingapps.Result.Error -> {
+                is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(context, "An error occurred" + result.error, Toast.LENGTH_SHORT)
                         .show()

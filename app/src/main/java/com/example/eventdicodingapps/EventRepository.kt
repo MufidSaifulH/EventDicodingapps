@@ -7,8 +7,6 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import com.example.eventdicodingapps.data.local.entity.EventEntity
 import com.example.eventdicodingapps.data.local.room.DicodingDao
-//import com.example.eventdicodingapps.data.local.entity.DicodingEntity
-//import com.example.eventdicodingapps.data.local.room.DicodingDao
 import com.example.eventdicodingapps.data.remote.retrofit.ApiService
 
 class EventRepository(
@@ -48,7 +46,6 @@ class EventRepository(
                     isFinished,
                 )
             }
-//            eventDao.deleteAll()
             eventList?.let { dicodingDao.insertEvents(it) }
         } catch (e: Exception) {
             Log.d("EventRepository", "getEvents: ${e.message.toString()} ")
@@ -88,7 +85,6 @@ class EventRepository(
                     isFinished,
                 )
             }
-//            eventDao.deleteAll()
             eventList?.let { dicodingDao.insertEvents(it) }
         } catch (e: Exception) {
             Log.d("EventRepository", "getEvents: ${e.message.toString()} ")
@@ -108,17 +104,6 @@ class EventRepository(
         dicodingDao.updateEvents(events)
 
     }
-
-//    fun searchUpcomingEvents(query: String): LiveData<Result<List<EventEntity>>> = liveData {
-//        emit(Result.Loading)
-//        try {
-//            val localData: LiveData<Result<List<EventEntity>>> =
-//                eventDao.searchUpcomingEvents(query).map { Result.Success(it) }
-//            emitSource(localData)
-//        } catch (e: Exception) {
-//            emit(Result.Error(e.message.toString()))
-//        }
-//    }
 
     fun searchFinishedEvents(query: String): LiveData<Result<List<EventEntity>>> = liveData {
         emit(Result.Loading)

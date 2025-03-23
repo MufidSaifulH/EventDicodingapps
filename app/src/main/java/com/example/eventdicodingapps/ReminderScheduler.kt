@@ -18,7 +18,7 @@ object ReminderScheduler {
 
         WorkManager.getInstance(context).enqueueUniquePeriodicWork(
             WORK_TAG,
-            ExistingPeriodicWorkPolicy.REPLACE,
+            ExistingPeriodicWorkPolicy.UPDATE,
             workRequest
         )
     }

@@ -4,9 +4,8 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.eventdicodingapps.di.Injection
-import com.example.eventdicodingapps.ui.setting.SettingPreference
-import com.example.eventdicodingapps.ui.upcoming.UpcomingViewModel
-//
+
+
 class MainViewModelFactory (private val newsRepository: EventRepository) :
     ViewModelProvider.NewInstanceFactory() {
     @Suppress("UNCHECKED_CAST")

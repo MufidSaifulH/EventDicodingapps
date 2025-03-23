@@ -13,8 +13,6 @@ class MainViewModel(private val eventRepository: EventRepository) : ViewModel() 
     fun getFinishedEvents() = eventRepository.getFinishedEvents()
     fun getFavoriteEvents() = eventRepository.getFavoriteEvents()
 
-//    fun searchUpcomingEvents(query: String): LiveData<Result<List<EventEntity>>> =
-//        eventRepository.searchUpcomingEvents(query)
 
     fun searchFinishedEvents(query: String): LiveData<Result<List<EventEntity>>> =
         eventRepository.searchFinishedEvents(query)

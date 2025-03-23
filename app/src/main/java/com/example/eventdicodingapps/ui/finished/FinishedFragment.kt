@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -49,18 +48,18 @@ class FinishedFragment : Fragment() {
 
         viewModel.getFinishedEvents().observe(viewLifecycleOwner) { result ->
             when (result) {
-                is com.example.eventdicodingapps.Result.Loading -> {
+                is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                     verticalAdapter.setLoadingState(false)
                 }
 
-                is com.example.eventdicodingapps.Result.Success -> {
+                is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
                     verticalAdapter.setLoadingState(false)
                     verticalAdapter.submitList(result.data)
                 }
 
-                is com.example.eventdicodingapps.Result.Error -> {
+                is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
                     Toast.makeText(context, "An error occurred" + result.error, Toast.LENGTH_SHORT)
                         .show()
@@ -79,17 +78,17 @@ class FinishedFragment : Fragment() {
     private fun setupSearchView() {
         with(binding) {
             searchView.setupWithSearchBar(searchBar)
-            searchView.editText.setOnEditorActionListener { textView, actionId, event ->
+            searchView.editText.setOnEditorActionListener { _, _, _ ->
                 val query = searchView.text.toString()
                 searchBar.setText(searchView.text)
                 searchView.hide()
                 viewModel.searchFinishedEvents(query).observe(viewLifecycleOwner) { result ->
                     when (result) {
-                        is com.example.eventdicodingapps.Result.Loading -> {
+                        is Result.Loading -> {
                             updateUI(isLoading = true, isEmpty = false)
                         }
 
-                        is com.example.eventdicodingapps.Result.Success -> {
+                        is Result.Success -> {
                             verticalAdapter.submitList(result.data)
                             updateUI(isLoading = false, isEmpty = result.data.isEmpty())
                         }

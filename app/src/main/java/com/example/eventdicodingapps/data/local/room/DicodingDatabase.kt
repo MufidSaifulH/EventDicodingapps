@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.example.eventdicodingapps.EventRepository
 import com.example.eventdicodingapps.data.local.entity.EventEntity
 
 @Database(entities = [EventEntity::class], version = 2, exportSchema = false)

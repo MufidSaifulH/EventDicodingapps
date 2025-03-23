@@ -1,5 +1,6 @@
 package com.example.eventdicodingapps.ui.setting
 
+import android.Manifest
 import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -14,7 +15,6 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.lifecycleScope
 import com.example.eventdicodingapps.ReminderScheduler
 import com.example.eventdicodingapps.databinding.FragmentSettingBinding
-import com.google.android.material.switchmaterial.SwitchMaterial
 import kotlinx.coroutines.launch
 
 class SettingFragment : Fragment() {
@@ -24,16 +24,27 @@ class SettingFragment : Fragment() {
 
     private lateinit var settingViewModel: SettingViewModel
 
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestPermission()
+        ){ isgranted : Boolean ->
+            if (isgranted) {
+                Toast.makeText(requireContext(), "Notification permission granted", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(requireContext(), "Notification permission rejected", Toast.LENGTH_SHORT).show()
+            }
+        }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentSettingBinding.inflate(inflater, container, false)
 
         val pref = SettingPreference.getInstance(requireContext().dataStore)
-        val factory = SettingViewModelFactory(pref) // Pakai factory yang benar
-        settingViewModel = ViewModelProvider(this, factory).get(SettingViewModel::class.java)
+        val factory = SettingViewModelFactory(pref)
+        settingViewModel = ViewModelProvider(this, factory)[SettingViewModel::class.java]
 
         return binding.root
 
@@ -41,7 +52,6 @@ class SettingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        // Observasi perubahan tema
         settingViewModel.getThemeSetting().asLiveData().observe(viewLifecycleOwner) { isDarkModeActive ->
             if (isDarkModeActive) {
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -61,13 +71,15 @@ class SettingFragment : Fragment() {
             }
         }
 
-        // Ketika switch diubah
         binding.switchTheme.setOnCheckedChangeListener { _, isChecked ->
             viewLifecycleOwner.lifecycleScope.launch {
                 settingViewModel.saveThemeSetting(isChecked)
             }
         }
         binding.switchNotification.setOnCheckedChangeListener { _, isChecked ->
+            if (Build.VERSION.SDK_INT >= 33) {
+                requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
+            }
             viewLifecycleOwner.lifecycleScope.launch {
                 settingViewModel.saveNotificationSetting(isChecked)
             }

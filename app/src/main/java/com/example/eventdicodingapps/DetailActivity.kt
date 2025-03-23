@@ -25,9 +25,6 @@ class DetailActivity : AppCompatActivity() {
         binding = ActivityDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        setSupportActionBar(binding.toolbar)
-//        supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.setDisplayShowHomeEnabled(true)
 
         val factory = MainViewModelFactory.getInstance(this)
         viewModel = ViewModelProvider(this, factory)[MainViewModel::class.java]
@@ -36,7 +33,6 @@ class DetailActivity : AppCompatActivity() {
 
         event?.let { e ->
             binding.apply {
-                // menginisialisasi ikon favorite
                 updateFavoriteIcon(e.isFavorite)
 
                 titleTextView.text = event.name
@@ -53,13 +49,10 @@ class DetailActivity : AppCompatActivity() {
                     .into(imageView)
 
                 favoriteFab.setOnClickListener {
-                    // mengalihkan status favorite
                     e.isFavorite = !(e.isFavorite ?: false)
 
-                    // update ikon favorite
                     updateFavoriteIcon(e.isFavorite)
 
-                    // simpan atau hapus dari database
                     if (e.isFavorite == true) {
                         viewModel.saveEvents(e)
                     } else {
@@ -67,7 +60,6 @@ class DetailActivity : AppCompatActivity() {
                     }
                 }
 
-                // action untuk tombol website
                 webpageFab.setOnClickListener {
                     val builder = CustomTabsIntent.Builder()
                     val customTabsIntent = builder.build()
@@ -100,5 +92,4 @@ class DetailActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
 }
